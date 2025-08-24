@@ -1,0 +1,11 @@
+              precision    recall  f1-score   support
+
+        palm       0.94      0.97      0.96        34
+        fist       0.92      0.96      0.94        50
+   thumbs_up       1.00      0.79      0.88        19
+        okay       0.95      1.00      0.98        21
+       peace       1.00      1.00      1.00        35
+
+    accuracy                           0.96       159
+   macro avg       0.96      0.94      0.95       159
+weighted avg       0.96      0.96      0.96       159
