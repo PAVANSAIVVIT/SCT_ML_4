@@ -39,4 +39,4 @@ Once the training is finished, the following are produced:
 .A final trained model file, which can be reused without retraining.
 .A dataset file, containing all the recorded samples.
 .A classification report, summarizing the model’s accuracy, precision, recall, and F1-score.
-.These outputs ensure the system is ready for future use without repeating the full process.
+These outputs ensure the system is ready for future use without repeating the full process.
