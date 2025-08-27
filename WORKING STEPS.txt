@@ -1,0 +1,64 @@
+✋ Hand Gesture Recognition
+
+This project uses computer vision and machine learning to recognize hand gestures in realtime.
+It provides a complete pipeline that includes collecting gesture data, training a model, and testing predictions live with a webcam.
+
+📌 Supported Gestures
+
+The system currently supports five different hand gestures:
+
+Palm
+
+Fist
+
+Thumbs Up
+
+Okay
+
+Peace
+
+Each gesture is linked to a number key between 0 and 4 for easy data collection.
+
+🚀 How It Works
+Step 1: Gestures
+
+The gestures are denoted by specific keys:
+
+Press 0 for Palm
+
+Press 1 for Fist
+
+Press 2 for Thumbs Up
+
+Press 3 for Okay
+
+Press 4 for Peace
+
+Step 2: Train the Model
+
+When the program starts, the webcam will open.
+Show one of the gestures in front of the camera and press the corresponding number key.
+For example, if you show a thumbs up, press the number 2.
+The system saves that frame as a labeled sample.
+Repeat this process for all gestures, collecting enough samples to make training accurate.
+Once you are satisfied with the collection, press the letter q (or ESC) to stop.
+At this point, the system automatically trains a machine learning model on the collected data.
+
+Step 3: Test the Gestures
+
+After training is complete, the program automatically switches into realtime testing mode.
+Now you can simply show your hand in front of the webcam, and the system will recognize and display which gesture it sees.
+The recognized gesture name (Palm, Fist, Thumbs Up, Okay, or Peace) will appear on the screen.
+Press q (or ESC) to exit the testing phase.
+
+Step 4: Final Trained Model
+
+Once the training is finished, the following are produced:
+
+A final trained model file, which can be reused without retraining.
+
+A dataset file, containing all the recorded samples.
+
+A classification report, summarizing the model’s accuracy, precision, recall, and F1-score.
+
+These outputs ensure the system is ready for future use without repeating the full process.
