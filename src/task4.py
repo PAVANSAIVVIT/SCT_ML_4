@@ -37,7 +37,7 @@ def compute_angle(a, b, c):
 
 def extract_hand_features(landmarks, w, h):
     coords = np.array([[lm.x*w, lm.y*h, lm.z] for lm in landmarks], dtype=np.float32)
-    coords -= coords[0]  # relative to wrist
+    coords -= coords[0] 
 
     tips = [4, 8, 12, 16, 20]
     dists = [np.linalg.norm(coords[i]-coords[j]) for i in tips for j in tips if i < j]
@@ -52,7 +52,6 @@ def extract_hand_features(landmarks, w, h):
     return np.concatenate([coords.flatten(), dists, angles]).astype(np.float32)
 
 def collect_data_once(min_conf=0.6, cam_index=0):
-    # If file exists but empty → re-collect
     if CSV_PATH.exists() and CSV_PATH.stat().st_size > 0:
         print("✅ Data already exists. Skipping collection.")
         return
@@ -128,8 +127,6 @@ def train_model():
     y_pred = clf.predict(X_test)
     report = classification_report(y_test, y_pred, target_names=GESTURES)
     print("\nClassification Report:\n", report)
-
-    # Save model + report
     joblib.dump({"model": clf, "gestures": GESTURES}, MODEL_PATH)
     with open(REPORT_PATH, "w") as f:
         f.write(report)
@@ -188,7 +185,6 @@ def realtime(clf, min_conf=0.6, cam_index=0):
 
             key = cv2.waitKey(10) & 0xFF
             if key == ord('q') or key == 27: break
-
     cap.release()
     cv2.destroyAllWindows()
 if __name__ == "__main__":
