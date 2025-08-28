@@ -10,9 +10,6 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
-# -------------------------
-# Paths & Gestures
-# -------------------------
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
 MODELS_DIR = ROOT / "models"
@@ -28,16 +25,10 @@ REPORT_PATH = RESULTS_DIR / "classification_report.txt"
 GESTURES = ["palm", "fist", "thumbs_up", "okay", "peace"]
 KEY_TO_LABEL = {ord(str(i)): i for i in range(len(GESTURES))}
 
-# -------------------------
-# MediaPipe
-# -------------------------
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 mp_styles = mp.solutions.drawing_styles
 
-# -------------------------
-# Feature extraction
-# -------------------------
 def compute_angle(a, b, c):
     ba = a - b
     bc = c - b
@@ -60,9 +51,6 @@ def extract_hand_features(landmarks, w, h):
 
     return np.concatenate([coords.flatten(), dists, angles]).astype(np.float32)
 
-# -------------------------
-# Collect data (once)
-# -------------------------
 def collect_data_once(min_conf=0.6, cam_index=0):
     # If file exists but empty → re-collect
     if CSV_PATH.exists() and CSV_PATH.stat().st_size > 0:
@@ -118,9 +106,6 @@ def collect_data_once(min_conf=0.6, cam_index=0):
     cv2.destroyAllWindows()
     print(f"✅ Collection finished. Saved: {saved}")
 
-# -------------------------
-# Train model
-# -------------------------
 def train_model():
     if not CSV_PATH.exists() or CSV_PATH.stat().st_size == 0:
         print("❌ No data to train. Collect first.")
@@ -153,9 +138,6 @@ def train_model():
     print(f"📄 Report saved to {REPORT_PATH}")
     return clf
 
-# -------------------------
-# Realtime prediction
-# -------------------------
 def realtime(clf, min_conf=0.6, cam_index=0):
     cap = cv2.VideoCapture(cam_index)
     if not cap.isOpened():
@@ -209,10 +191,6 @@ def realtime(clf, min_conf=0.6, cam_index=0):
 
     cap.release()
     cv2.destroyAllWindows()
-
-# -------------------------
-# Main
-# -------------------------
 if __name__ == "__main__":
     collect_data_once()          
     clf = train_model()          
